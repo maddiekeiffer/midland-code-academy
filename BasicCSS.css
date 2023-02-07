@@ -1,0 +1,36 @@
+body {
+    background-color: black;
+} 
+
+.center {
+    text-align: center;
+    color: white;
+}
+
+.first-fact {
+    color: red;
+}
+
+.second-fact {
+    color: orange
+}
+
+.third-fact {
+    color: yellow;
+}
+
+.fourth-fact {
+    color: green;
+}
+
+.fifth-fact {
+    color: blue;
+}
+
+.sixth-fact {
+    color: indigo;
+}
+
+.seventh-fact {
+    color: violet;
+}
