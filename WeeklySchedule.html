@@ -1,0 +1,120 @@
+<!DOCTYPE html> 
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Maddie's Weekly Schedule</title>
+        <link rel="stylesheet" type="text/css" href="WeeklySchedule.css" /> 
+    </head>
+
+    <body>
+        <h4>Maddie's Weekly Schedule:</h4>
+        <table>
+            <tr> 
+                <th></th>
+                <th>Monday</th>
+                <th>Tuesday</th>
+                <th>Wednesday</th>
+                <th>Thursday</th>
+                <th>Friday</th>
+                <th>Saturday</th>
+                <th>Sunday</th>
+            </tr>
+            <tr> 
+                <th>Morning</th>
+                <td class= "breakfast" colspan="3">Breakfast</td>
+                <td class="ymca">YMCA</td>
+                <td class="tiptop">Tip Top</td>
+                <td class= "breeze" colspan="2" rowspan="3">Breeze's</td>
+                
+            </tr>
+            <tr>
+                <th>Afternoon</th>
+                <td class="nana" colspan="5">Lunch w/ Nana</td>
+                
+            </tr>
+            <tr> 
+                <th>Evening</th>
+                <td class="class" colspan="4">Class</td>
+                <td></td>
+                
+            </tr>
+        </table>
+
+        <form id="basic-info">
+            <h4>Basic Information</h4>
+            <label for="name">Name: </label>
+            <input type="text" id="name" />
+            <label for="email">Email:</label>
+            <input type="text" id="email" />
+
+            <h4>Choose a side:</h4>
+            <input type="radio" 
+                id="side-1" 
+                name="side" 
+                value="left" 
+            />
+            <label for="side-1">Left</label>
+
+            <input type="radio" 
+                id="side-2" 
+                name="side" 
+                value="center" 
+            />
+            <label for="side-2">Center</label>
+
+            <input type="radio" 
+                id="side-3" 
+                name="side" 
+                value="right" 
+            />
+            <label for="side-3">Right</label>
+
+            <h4>Favorite Animal(s):</h4>
+                <input type="checkbox" 
+                id="animal-1"
+                 name="animal" 
+                 value="dog" 
+                 />
+                <label for="animal-1">Dog</label>
+
+                <input type="checkbox" 
+                id="animal-2"
+                 name="animal" 
+                 value="cat" 
+                 />
+                <label for="animal-2">Cat</label>
+
+                <input type="checkbox" 
+                id="animal-3"
+                 name="animal" 
+                 value="horse" 
+                 />
+                <label for="animal-3">Horse</label>
+
+                <input type="checkbox" 
+                id="animal-4"
+                 name="animal" 
+                 value="amphibian" 
+                 />
+                <label for="animal-4">Amphibian</label>
+
+            <h4>Best Icecream Flavor: (Select one)</h4>
+            
+            <select name="icecream-flavor" id="icecream-flavor">
+                <optgroup label="Classic">
+                    <option value="Vanilla">Vanilla</option>
+                    <option value="Chocolate">Chocolate</option>
+                    <option value="Strawberry">Strawberry</option>
+                </optgroup>
+                <optgroup label="Fun">
+                    <option value="Cookie-Dough">Cookie Dough</option>
+                    <option value="Mint-Chip">Mint Chip</option>
+                    <option value="Cookies-N-Cream">Cookies N Cream</option>
+                </optgroup>
+            </select>
+
+        </form>
+
+    </body>
+</html>
+
