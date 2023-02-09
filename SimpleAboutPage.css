@@ -1,0 +1,44 @@
+body {
+    background-color: rgba(201,157,244,0.8);
+}
+
+.center {
+    text-align: center;
+    font-family: 'Josefin Sans', sans-serif;
+}
+
+.pitbull-pic {
+    margin-left:auto;
+    margin-right: auto;
+    border-radius: 50px;
+    display:block;
+}
+
+.pitbull-pic:hover {
+    border-radius: 0px;
+}
+a:link {
+    color:blueviolet;
+}
+
+a:hover{
+    color: orange;
+}
+
+a:visited{
+    color: red;
+}
+
+.left-list{
+    float: left;
+    font-family: 'Quicksand', sans-serif;
+}
+.right-list {
+    float: right;
+    font-family: 'Quicksand', sans-serif;
+}
+footer {
+    position: fixed;
+    bottom: 50px;
+    
+}
