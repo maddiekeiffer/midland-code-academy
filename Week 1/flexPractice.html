@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Maddie's FlexBox Practice</title>
+    <style>
+        .header-footer {
+            height: 50px;
+            line-height:50px;
+            background-color: rgb(0,0,0);
+            color: #ffffff;
+            text-align: center;
+        }
+        .main-container {
+            display: flex;
+            flex-flow: row wrap;
+            text-align: center;
+            color: white;
+        }
+        .blue-container {
+            display: flex;
+            flex-flow: row wrap;
+            flex-basis: calc(100% / 3 * 2);
+        }
+        .red-container {
+            display: flex;
+            flex-flow: column wrap;
+            flex-basis: calc(100% / 3);
+        }
+        .blue-box {
+            flex: 1 1 calc(100% / 3 - 4px);
+            margin: 2px;
+            background-color: blue;
+        }
+        .red-box {
+            margin: 2px;
+            background-color: red;
+            min-height: 100px;
+        }
+        .order-1 {
+            order: 1;
+        }
+        .order-2 {
+            order: 2;
+        }
+        .order-3 {
+            order: 3;
+        }
+
+    </style>
+
+  </head>
+
+  <body>
+    <header class="header-footer">HEADER</header>
+    <div class="main-container">
+        <div class="blue-container">
+            <div class="blue-box">1.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Massa vitae tortor condimentum lacinia quis vel.</div>
+            <div class="blue-box order-1">2. Risus viverra adipiscing at in tellus integer feugiat scelerisque. </div>
+            <div class="blue-box order-3">3. Mauris rhoncus aenean vel elit scelerisque mauris.</div>
+            <div class="blue-box order-2">4. Eros in cursus turpis massa.</div>
+            <div class="blue-box order-1">5. Quam lacus suspendisse faucibus interdum posuere lorem ipsum dolor sit. </div>
+            <div class="blue-box">6. Et tortor consequat id porta nibh. Proin sagittis nisl rhoncus mattis rhoncus urna neque viverra justo.</div>
+        </div>
+        <div class="red-container">
+            <div class="red-box order-1">1. Sed viverra tellus in hac habitasse platea dictumst.</div>
+            <div class="red-box">2. Aliquet risus feugiat in ante metus dictum at tempor. Tincidunt arcu non sodales neque sodales ut.</div>
+            <div class="red-box">3. Amet massa vitae tortor condimentum lacinia. Dui nunc mattis enim ut tellus elementum sagittis vitae et. Nulla facilisi morbi tempus iaculis urna id volutpat lacus.</div>
+        </div>
+    </div>
+    <footer class="header-footer">FOOTER</footer>
+  </body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tetris by Maddie</title>
+    <style>
+        .top-row {
+            display: flex;
+            flex-flow: row wrap;
+            /*justify-content: space-around;*/
+            flex-direction: row;
+        }
+        .b-left {
+            border-left: 2px solid black;
+        }
+        .b-top {
+            border-top: 2px solid black;
+        }
+        .b-right {
+            border-right: 2px solid black;
+        }
+        .b-bottom {
+            border-bottom: 2px solid black;
+        }
+        .teal {
+            box-sizing: border-box;
+            background-color: aqua;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .lime {
+            box-sizing: border-box;
+            background-color: lime;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .yellow {
+            box-sizing: border-box;
+            background-color: yellow;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .purple {
+            box-sizing: border-box;
+            background-color: purple;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .black {
+            box-sizing: border-box;
+            background-color: black;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .mid-row {
+            display: flex;
+            flex-flow: row wrap;
+            /*justify-content: space-around;*/
+            flex-direction: row;
+        }
+        .blue {
+            box-sizing: border-box;
+            background-color: blue;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .orange {
+            box-sizing: border-box;
+            background-color: orange;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .red {
+            box-sizing: border-box;
+            background-color: red;
+            width: 75px;
+            height: 75px;
+            box-shadow:0 0 10px #36454F;
+        }
+        .bottom-row {
+            display: flex;
+            flex-flow: row wrap;
+            /*justify-content: space-around;*/
+            flex-direction: row;
+        }
+
+    </style>
+  </head>
+
+  <body>
+    <div class="top-row"> 
+        <div class="teal"></div>
+        <div class="teal"></div>
+        <div class="teal"></div>
+        <div class="teal"></div>
+
+        <div class="lime b-left b-right"></div>
+        
+        <div class="yellow b-bottom"></div>
+        <div class="yellow b-right"></div>
+
+        <div class="purple"></div>
+        <div class="purple"></div>
+
+        <div class="black"></div>
+    </div>
+    <div class="mid-row">
+        <div class="blue b-top"></div>
+        <div class="blue b-top"></div>
+
+        <div class="orange b-left b-top"></div>
+
+        <div class="black"></div>
+        
+        <div class="lime b-left b-bottom"></div>
+        <div class="lime b-right"></div>
+
+        <div class="red b-top"></div>
+        <div class="red b-top b-right"></div>
+
+        <div class="purple b-bottom"></div>
+
+        <div class="black"></div>
+    </div>
+    <div class="bottom-row">
+        <div class="blue"></div>
+        <div class="blue"></div>
+
+        <div class="orange b-left"></div>
+        <div class="orange"></div>
+        <div class="orange b-right"></div>
+
+        <div class="lime b-right"></div>
+
+        <div class="black"></div>
+
+        <div class="red"></div>
+        <div class="red b-right"></div>
+
+        <div class="orange"></div>
+    </div>
+  </body>
