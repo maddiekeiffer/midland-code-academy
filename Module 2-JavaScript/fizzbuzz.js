@@ -63,8 +63,8 @@ console.log(y - x);  //23.450000000000003
 let four = 4;
 let fourString = "4";
 
-console.log("four == fourString", four == fourString);
-console.log("four === fourString", four === fourString);
+console.log("four == fourString", four == fourString); //true
+console.log("four === fourString", four === fourString); //false
 
 //!! Modify the FizzBuzz problem to allow the user to choose a max integer. 
 //!! (example: the user is prompted for a number, they choose 15, so the problem runs through the numbers 1 to 15)
