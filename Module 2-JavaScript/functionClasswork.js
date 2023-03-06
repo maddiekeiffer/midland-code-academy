@@ -74,12 +74,21 @@ palindrome("Madam");
 //! If any of the banned words appear in the array of words (case sensitive),
 //! replace them with "REDACTED. Do this without any prototypical methods.
 
-let bannedWords = ["Fuck", "Ass", "Bitch", "Cunt"];
+ let bannedWords = ["Fuck", "Ass", "Bitch"];
+ let words = ["Fuck", "Bitch", "Nice", "Ass", "Tiger"];
 
-function bannedWordsFunction (bannedArray) {
+function bannedWordsFunction (bannedArray, wordsArray) {
 
-
+    for(i = 0; i < bannedArray.length; i++) {
+        for(j = 0; j < wordsArray.length; j++) {
+            if(bannedArray[i] === wordsArray[j]) {
+                wordsArray[j] = "REDACTED";
+            } 
+        }
+    }
+    console.log(wordsArray);
 }
+bannedWordsFunction(bannedWords, words);
 
 
 // -----------------------------------------------------------------
@@ -125,9 +134,9 @@ function numberCycle(a, b) {
     console.log("\n");
 
 }
-numberCycle(20, 40);
-numberCycle(20, 10);
-numberCycle(10, 10);
+// numberCycle(20, 40);
+// numberCycle(20, 10);
+// numberCycle(10, 10);
 
 // -----------------------------------------------------------------
 //! Write a function to see if a pizza can be split evenly amongst a group of people.
@@ -158,6 +167,22 @@ function pizzaShare(slices, people) {
 //! Write a function to see if a triangle is a right triangle based off
 //! whether or not square of the longest side is equal to the sum of the squares of the other sides.
 
+function rightTriangle(a, b, c) {
+    //a^2 + b^2 = c^2
+    c *= c;
+    b *= b;
+    a *= a;
+    let twoSides = a + b;
+    if(c === twoSides) {
+        console.log("Triangle is a right triangle.")
+    } else {
+        console.log("Triangle is not a right triangle.");
+    }
+}
+//rightTriangle(3, 4, 5); //right triangle
+//rightTriangle(5, 4, 3); //not right triangle
+
+
 // -----------------------------------------------------------------
 //! Write a function to check to see if a warrior can beat all of the monsters in a dungeon.
 //! Supply the function with the amount of damage each of the monsters do (in array format) and
@@ -171,4 +196,26 @@ function pizzaShare(slices, people) {
 //? 10;
 //? Since 1+3+2+8+5 = 19 and 10-19 < 0 they could not survive
 
+    let monsterOne = [1, 3, 2, 8, 5]; //19
+    let monsterTwo = [3, 4, 8, 7, 6]; //28
+
+    let warriorOne = 10;
+    let warriorTwo = 30;
+
+function monsterDungeon(monDamage, warHealth) {
+    let sum = 0;
+    for(let i = 0; i < monDamage.length; i++) {
+        sum = sum + monDamage[i];
+    }
+    console.log(sum);
+    if(sum > warHealth) {
+        console.log("You will not survive the monster attack.");
+    } else {
+        console.log("You will survive the monster attack!");
+    }
+}
+
+//monsterDungeon(monsterOne, warriorOne); //will not survive
+//monsterDungeon(monsterTwo, warriorTwo); //will survive
+ 
 // -----------------------------------------------------------------
