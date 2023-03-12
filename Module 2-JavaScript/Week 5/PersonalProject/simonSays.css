@@ -1,0 +1,67 @@
+body {
+    box-sizing: border-box;
+    padding: 20px;
+    overflow: hidden;
+}
+button {
+    text-align: center;
+    border-radius: 5px;
+}
+.header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: -25px;
+    margin-bottom: -5px;
+    flex-flow: column wrap;
+}
+p.instructions {
+    font-size: large;
+}
+.tile-container {
+    width: 500px;
+    height: 500px;
+    margin: 20px auto;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.game-board {
+    width: 90%;
+    height: 90%;
+    border-radius: 50%;
+    display: flex;
+    flex-wrap: wrap;
+    overflow: hidden;
+}
+.tile {
+    width: 50%;
+    height: 50%;
+}
+.tile:hover {
+    opacity: 80%;
+}
+
+.aqua {
+    background-color: aqua;
+}
+.blue {
+    background-color: blue;
+}
+.green {
+    background-color: green;
+}
+.purple {
+    background-color: blueviolet;
+}
+
+.inactive {
+    opacity: 30%;
+}
+.hidden {
+    display: none;
+}
+.unclickable {
+    pointer-events: none;
+}
