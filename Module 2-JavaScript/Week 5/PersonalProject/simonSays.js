@@ -21,6 +21,7 @@ gameBoard.addEventListener('click', (event) => {
 function gameStart() {
     startButton.classList.add("hidden");
 
+
     instructions.innerText = "Wait for Simon.";
 
     userLevel = 0;
@@ -31,13 +32,17 @@ function gameStart() {
 //continues to next level 
 function nextLevel() {
     userLevel += 1;
+    userSequence = [];
     gameBoard.classList.add("unclickable");
     instructions.innerText = "Watch the sequence!";
     levelText.innerText = userLevel;
 
     //level up to add one tile to simon sequence
-    simonSequence.push(randomTile());
-    playSequence(simonSequence);
+    setTimeout(() => {
+        simonSequence.push(randomTile());
+        playSequence(simonSequence);
+    }, 1000);
+    
 
     setTimeout(() => {
         userTurn();
@@ -80,6 +85,7 @@ function tileClick(tile) {
     userSequence.push(tile);
 
     if(userSequence.length === simonSequence.length) {
+        userSequence = [];
         if(userLevel === 6) {
             winGame();
         } else {
