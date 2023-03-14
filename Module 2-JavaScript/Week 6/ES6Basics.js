@@ -7,9 +7,6 @@ console.log(combineArray);
 let shallowCopy = [...combineArray]; 
 //console.log(shallowCopy);
 
-//const sortedArray = (a) => {a.sort(); console.log(a); };
-//sortedArray(shallowCopy);
-
 shallowCopy.sort((a, b) => a - b);
 
 console.log(shallowCopy);
