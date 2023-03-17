@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Maddie's API Project</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            label, input, #type { 
+                font-size: larger;
+                padding: 5px;
+            }
+            p {
+                font-size: medium;
+            }
+            .btn {
+                font-size: large;
+                margin-bottom: 5px;
+                margin-left: 5px;
+                background-color: rgb(109, 109, 109);
+                color: white;
+                border-radius: 5px;
+
+            }
+            .btn:hover {
+                background-color: rgb(195, 195, 195);
+                color: black;
+                cursor: pointer;
+            }
+            .header {
+                text-align: center;
+            }
+            .hidden {
+                display: none;
+            }
+            #results {
+                margin-left: 10px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h2 class="header">API Project</h2>
+        <div id="search-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" />
+            <label for="year">Year:</label>
+            <input type="text" id="year" />
+            <label for="type">Type: </label>
+            <select name="type" id="type">
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+                <option value="episode">Episode</option>
+            </select>
+            <button id="search" class="btn">Search</button>
+        </div>
+        <div id="results"></div>
+        <button data-toggle="collapse" data-target="#extraInfo" class="btn hidden" id="infoButton">Extra Information</button>
+        <div class="collapse" id="extraInfo"></div>
+        
+        <script>
+            const searchTitle = document.getElementById("title");
+            const searchYear = document.getElementById("year");
+            const searchType = document.getElementById("type");
+            const search = document.getElementById("search");
+            const results = document.getElementById("results");
+            const extraInfo = document.getElementById("extraInfo");
+            const infoButton = document.getElementById("infoButton");
+            
+            infoButton.classList.add("hidden");
+
+            infoButton.addEventListener("click", () => {
+                extraInfo.classList.add("show");
+                //infoButton.classList.add("hidden");
+                extraInfo.style.marginBottom = "50px";
+                extraInfo.style.marginLeft = "20px";
+                extraInfo.style.marginTop = "20px";
+                infoButton.innerText = "Less Information";
+            });
+            
+            infoButton.addEventListener("dblclick", () => {
+                extraInfo.classList.remove("show");
+                infoButton.innerText = "More Information";
+            });
+
+            function buildURL() {
+                let base = `http://www.omdbapi.com/?apikey=3943dda0&t=${searchTitle.value}&type=${searchType.value}`;
+                if(searchYear.value !== "") {
+                    base = base + `&y=${searchYear.value}`;
+                    return base;
+                }
+                return base;
+            }
+
+            function displayResults(res) {
+
+                const title = document.createElement("h2");
+                title.textContent = res.Title;
+                const year = document.createElement("h4");
+                year.textContent = "Year: " + res.Year;
+                const type = document.createElement("h6");
+                type.textContent = "Type: " + res.Type;
+                const rated = document.createElement("h5");
+                rated.textContent = "Rated: " + res.Rated;
+                const runtime = document.createElement("h6");
+                runtime.textContent = "Runtime: " + res.Runtime;
+                const genre = document.createElement("h5");
+                genre.textContent = "Genre: " + res.Genre;
+                const actors = document.createElement("h5");
+                actors.textContent = "Starring: " + res.Actors;
+                const plot = document.createElement("p");
+                plot.textContent =  res.Plot;
+
+                results.appendChild(title);
+                results.appendChild(year);
+                results.appendChild(type);
+                results.appendChild(rated);
+                results.appendChild(runtime);
+                results.appendChild(genre);
+                results.appendChild(actors);
+                results.appendChild(plot);
+
+                //extraInfo items
+                const released = document.createElement("h6");
+                released.textContent = "Released: " + res.Released;
+                const boxOffice = document.createElement("h6");
+                boxOffice.textContent = "Box Office: " + res.BoxOffice;
+                const director = document.createElement("h6");
+                director.textContent = "Director: " + res.Director;
+                const writer = document.createElement("h6");
+                writer.textContent = "Writer(s): " + res.Writer;
+                const awards = document.createElement("h6");
+                awards.textContent = "Award(s): " + res.Awards;
+                const dvd = document.createElement("h6");
+                dvd.textContent = "DVD: " + res.DVD;
+                const poster = document.createElement("h6");
+                poster.textContent = "Poster: " + res.Poster;
+                const language = document.createElement("h6");
+                language.textContent = "Language(s): " + res.Language;
+                const country = document.createElement("h6");
+                country.textContent = "Country: " + res.Country;
+                const metascore = document.createElement("h6");
+                metascore.textContent = "Metascore: " + res.Metascore;
+                const imdbRating = document.createElement("h6");
+                imdbRating.textContent = "IMDB Rating: " + res.imdbRating;
+                const imdbVotes = document.createElement("h6");
+                imdbVotes.textContent = "IMDB Votes: " + res.imdbVotes;
+                const imdbID = document.createElement("h6");
+                imdbID.textContent = "IMDB ID: " + res.imdbID;
+
+                const ratings = document.createElement("h6");
+                ratings.innerText = "Ratings: \t\n";
+                res.Ratings.forEach(rating => {
+                    const source = rating.Source;  
+                    const value = rating.Value;
+
+                    ratings.textContent += `Value: ${value}, Source: ${source}. `;
+                });
+
+                extraInfo.appendChild(released);
+                extraInfo.appendChild(boxOffice);
+                extraInfo.appendChild(director);
+                extraInfo.appendChild(writer);
+                extraInfo.appendChild(awards);
+                extraInfo.appendChild(dvd);
+                extraInfo.appendChild(poster);
+                extraInfo.appendChild(ratings);
+                extraInfo.appendChild(language);
+                extraInfo.appendChild(country);
+                extraInfo.appendChild(metascore);
+                extraInfo.appendChild(imdbRating);
+                extraInfo.appendChild(imdbVotes);
+                extraInfo.appendChild(imdbID);
+
+            }
+
+            //my api key=3943dda0
+            search.addEventListener("click", (e) => {
+                e.preventDefault();
+                if(searchTitle.value.length < 3) {
+                    alert("Please enter 3 or more characters.");
+                 } else {
+                    fetch(buildURL())
+                    
+                    .then ((response) => {
+                        if(!response.ok) {
+                            console.log(response.status);
+                        } 
+                        return response.json();
+                    })
+                    .then((res) => {
+                        if (res.Error || res.Response === "False") {
+                            alert("Error: " + res.Error);
+                        }
+                        else {
+                            displayResults(res);
+                            infoButton.classList.remove("hidden");
+                        }});
+                    
+                 }
+            });
+        </script>
+    </body>
+</html>
