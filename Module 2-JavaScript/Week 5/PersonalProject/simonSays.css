@@ -2,10 +2,16 @@ body {
     box-sizing: border-box;
     padding: 20px;
     overflow: hidden;
+    background: rgb(61,176,255);
+background: radial-gradient(circle, rgba(61,176,255,0.5353535353535354) 0%, rgba(115,0,255,0.5303030303030303) 100%);
+}
+h2 {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 700;
 }
 button {
     text-align: center;
-    border-radius: 5px;
+    border-radius: 5px; 
 }
 .header {
     display: flex;
@@ -15,7 +21,13 @@ button {
     margin-bottom: -5px;
     flex-flow: column wrap;
 }
+.level, #level {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 300;
+}
 p.instructions {
+    font-family: 'Kanit', sans-serif;
+    font-weight: 300;
     font-size: large;
 }
 .tile-container {
@@ -44,20 +56,20 @@ p.instructions {
 }
 
 .aqua {
-    background-color: aqua;
+    background-color: #00FFFF;
 }
-.blue {
-    background-color: blue;
+.pink {
+    background-color: #FE2EF7;
 }
 .green {
-    background-color: green;
+    background-color: #00FF00;
 }
 .purple {
-    background-color: blueviolet;
+    background-color: #8600ff;
 }
 
 .inactive {
-    opacity: 30%;
+    opacity: 35%;
 }
 .hidden {
     display: none;

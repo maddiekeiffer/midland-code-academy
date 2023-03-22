@@ -4,7 +4,12 @@ const gameBoard = document.querySelector(".game-board");
 
 const levelText = document.getElementById("level");
 
-const tiles = ["aqua", "blue", "green", "purple"];
+const tiles = ["aqua", "pink", "green", "purple"];
+
+const userTurnTime = 950;
+const simonSeqTime = 750;
+const nextLevelTime = 1300;
+const inactiveTileTime = 350;
 
 let userLevel = 0;
 let simonSequence = [];
@@ -46,7 +51,7 @@ function nextLevel() {
 
     setTimeout(() => {
         userTurn();
-    }, userLevel * 950);
+    }, userLevel * userTurnTime);
 
 }
 
@@ -61,7 +66,7 @@ function playSequence(sequence) {
     sequence.forEach((color, index) => {
         setTimeout(() => {
             activeTile(color);
-        }, index * 750);
+        }, index * simonSeqTime);
     })
 }
 
@@ -72,7 +77,7 @@ function activeTile(color) {
 
     setTimeout(() => {
         tile.classList.add("inactive");
-    }, 350);
+    }, inactiveTileTime);
 }
 
 function userTurn() {
@@ -89,20 +94,25 @@ function tileClick(tile) {
         if(userLevel === 6) {
             winGame();
         } else {
-            instructions.innerText = "Keep going!"
-            setTimeout(nextLevel, 1300);
+            instructions.innerText = "Keep going!";
+            setTimeout(nextLevel, nextLevelTime);
             return;
         }
     }
 
+    let wrongTileClicked = false; 
+
     for (let i = 0; i < userSequence.length; i++){
         if(userSequence[i] !== simonSequence[i]) {
-            resetGame();
-            return;
+            wrongTileClicked = true;
+            break; //This will "jump out" of the loop
         } 
     }
 
-
+    if (wrongTileClicked) {
+        resetGame();
+        return;
+    }
 }
 
 function resetGame() {
