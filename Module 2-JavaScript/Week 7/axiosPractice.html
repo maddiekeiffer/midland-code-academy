@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <title>Maddie's Axios Practice</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <style>
+            label, input, #type { 
+                font-size: larger;
+                padding: 5px;
+            }
+            p {
+                font-size: medium;
+            }
+            .btn {
+                font-size: large;
+                margin-bottom: 5px;
+                margin-left: 5px;
+                background-color: rgb(109, 109, 109);
+                color: white;
+                border-radius: 5px;
+
+            }
+            .btn:hover {
+                background-color: rgb(195, 195, 195);
+                color: black;
+                cursor: pointer;
+            }
+            .header {
+                text-align: center;
+            }
+            .hidden {
+                display: none;
+            }
+            #results {
+                margin-left: 10px;
+            }
+        </style>
+
+    </head>
+    <body>
+        <h2 class="header">Search Database</h2>
+        <div id="search-form">
+            <label for="title">Title:</label>
+            <input type="text" id="title" />
+            <label for="year">Year:</label>
+            <input type="text" id="year" />
+            <label for="type">Type: </label>
+            <select name="type" id="type">
+                <option value="movie">Movie</option>
+                <option value="series">Series</option>
+                <option value="episode">Episode</option>
+            </select>
+            <button id="search" class="btn">Search</button>
+        </div>
+        <div id="results"></div>
+        <button data-toggle="collapse" data-target="#extraInfo" class="btn hidden" id="infoButton">Extra Information</button>
+        <div class="collapse" id="extraInfo"></div>
+
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+        <script src="axiosPractice.js"></script>
+    </body>
+</html>

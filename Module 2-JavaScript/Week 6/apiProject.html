@@ -150,7 +150,7 @@
                 imdbID.textContent = "IMDB ID: " + res.imdbID;
 
                 const ratings = document.createElement("h6");
-                ratings.innerText = "Ratings: \t\n";
+                ratings.innerText = "Ratings: ";
                 res.Ratings.forEach(rating => {
                     const source = rating.Source;  
                     const value = rating.Value;
