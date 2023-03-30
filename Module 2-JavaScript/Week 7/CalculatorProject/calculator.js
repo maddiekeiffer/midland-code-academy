@@ -154,17 +154,17 @@ function numberBtn(btn) {
 function showSelectedOperator() {
     
     for(let i = 0; i < operator.length; i++) {
-        operator[i].style.backgroundColor = "orange";
+        operator[i].style.backgroundColor = "#A15D98";
     }
 
     if(operatorValue == "+") {
-        document.getElementById("add").style.backgroundColor = "FDDA0D";
+        document.getElementById("add").style.backgroundColor = "#E4CEE0";
     } else if (operatorValue == "-") {
-        document.getElementById("subtract").style.backgroundColor = "FDDA0D";
+        document.getElementById("subtract").style.backgroundColor = "#E4CEE0";
     } else if (operatorValue == "*") {
-        document.getElementById("multiply").style.backgroundColor = "FDDA0D";
+        document.getElementById("multiply").style.backgroundColor = "#E4CEE0";
     } else if (operatorValue == "/") {
-        document.getElementById("divide").style.backgroundColor = "FDDA0D";
+        document.getElementById("divide").style.backgroundColor = "#E4CEE0";
     }
 }
 //calculates result using 2 numbers and an operator
@@ -221,7 +221,7 @@ function calcPercent() {
 
     //deselect operator if any selected
     for(let i = 0; i < operator.length; i++) {
-        operator[i].style.backgroundColor = "orange";
+        operator[i].style.backgroundColor = "#A15D98";
     }
 }
 //function to change sign of the number currently shown
@@ -282,7 +282,7 @@ function squareRoot() {
 }
 
 document.addEventListener('keydown', pressedKey);
-
+//function to capture keydown events
 function pressedKey(e) {
     e.preventDefault();
 
@@ -309,10 +309,6 @@ function pressedKey(e) {
     if (isNumber || operators.includes(e.key) || e.key == "Enter" || e.key == pressDot || pressComma) {
         if (e.key == "Enter") {
             numberBtn(pressEnter);
-        }
-        else if (e.key == "Backspace") {
-            document.getElementById('backspaceBtn').style.backgroundColor = "grey";
-            backspaceBtn();
         }
         else if (pressComma) {
             numberBtn(dot);
