@@ -281,6 +281,27 @@ function squareRoot() {
     numbers.push(squareRootNum);
 }
 
+function addBtnHoverEffect() {
+    const buttons = document.querySelectorAll(".operator, #clear, #backspace, #percentage");
+
+    buttons.forEach((button) => {
+        button.addEventListener('mouseover', () => {
+            button.style.backgroundColor = "#E4CEE0";
+        });
+        button.addEventListener('mouseout', () => {
+            if(button.classList.contains("operator") && button.value !== operatorValue) {
+                button.style.backgroundColor = "#A15D98";
+            } 
+            else if(!button.classList.contains("operator")) {
+                button.style.backgroundColor = "#A15D98";
+            }
+        });
+        
+    })
+}
+
+addBtnHoverEffect();
+
 document.addEventListener('keydown', pressedKey);
 //function to capture keydown events
 function pressedKey(e) {

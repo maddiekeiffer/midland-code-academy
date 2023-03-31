@@ -1,3 +1,12 @@
+/*
+COLOR THEME:
+LIGHT BLUE: DDF2F4
+MEDIUM BLUE: 84A6D6
+DARK BLUE: 4382BB
+DARK PURPLE: A15D98
+LIGHT PURPLE: E4CEE0
+*/
+
 body {
     margin: 0 auto;
     background-color: #DDF2F4;
@@ -44,14 +53,8 @@ button {
     border-radius: 50%;
     border: 1px solid #4382BB;
 }
-button:hover {
-    background-color: #E4CEE0;
-}
 .operator {
     background-color: #A15D98;
-}
-.operator:hover {
-    background-color:  #E4CEE0;
 }
 .empty {
     pointer-events: none;
