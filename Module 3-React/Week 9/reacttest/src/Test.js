@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export default function Test() {
   return (
@@ -21,4 +21,7 @@ function NewTest() {
     );
 }
 
+//Can write it like it is below:
+//function Test() {};
+//THEN below function:
 //export default Test;
