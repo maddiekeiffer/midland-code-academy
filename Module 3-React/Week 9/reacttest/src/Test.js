@@ -1,15 +1,14 @@
 import React from 'react';
 
-export default function Test() {
+export function Test() {
   return (
     <div className="Test">
     <h1>Testing....</h1>
-    <NewTest />
     </div>
   )
 }
 
-function NewTest() {
+export function NewTest() {
     let audio = new Audio('https://themushroomkingdom.net/sounds/wav/smb/smb_vine.wav');
     const start = () => {
         audio.play();
