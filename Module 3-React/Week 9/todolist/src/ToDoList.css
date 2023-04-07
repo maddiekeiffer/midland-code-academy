@@ -1,0 +1,26 @@
+#container label {
+    font-weight: bold;
+}
+
+#newTask p {
+    font-size: small;
+}
+input {
+    border-radius: 10px;
+}
+
+button {
+    border-radius: 15px;
+    background-color: black;
+    color: white;
+    font-weight: bold;
+}
+button:hover {
+    cursor:pointer;
+}
+.text :hover {
+    cursor: text;
+}
+.checkbox:hover {
+    cursor: pointer;
+}

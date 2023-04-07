@@ -1,59 +1,76 @@
-import React from 'react';
+import './ToDoList.css';
+import React, { useState } from 'react';
 
-let {username, title} = '';
-let todoList = [
-    {id: 0, name: "m", task: "clean"},
-    {id: 1, name: "m", task: "cry"}, 
-    {id: 2, name: "m", task: "repeat"},  
-    ];
+export function ToDoTaskDisplay() {
+    const [username, setUsername] = useState('');
+    const [task, setTask] = useState('');
 
-const HandleUserName = (e) => {
-    e.preventDefault();
-    username = e.target.value;
-    //console.log(username);
-}
-const HandleTask = (e) => {
-    e.preventDefault();
-    title = e.target.value;
-    //console.log(title);
-}
-const AddTasks = (e) => {
-    e.preventDefault();
-    todoList.push({id: todoList.length + 1, name: username, task: title});
-    console.log(todoList);
-    //console.log(username + "'s to do task: " + title);
-    return(
-        <div>
-        {username}'s to do task: {title}
-        </div>
-    );
-}
+    const HandleUserName = (e) => {
+        e.preventDefault();
+        setUsername(e.target.value);
+    }
+    const HandleTask = (e) => {
+        e.preventDefault();
+        setTask(e.target.value);
+    }
+    const [todoList, setToDoList] = useState([
+        {id: 1, name: "mads", task: "clean", completed: false},
+        {id: 2, name: "mads", task: "cry", completed: false}, 
+        {id: 3, name: "mads", task: "repeat", completed: false},  
+        ]);
 
-export function LoginTaskDisplay() {
-    return(
-        <div>
-        <label>Username: 
-            <input id="username" type="text" onChange={(HandleUserName)}></input>
-        </label>
-        <label>To Do Task: 
-            <input id="title" type="text" onChange={HandleTask}></input>
-        </label>
-        <button className="add-btn" type="button" onClick={AddTasks}>Add</button>
+    const AddTasks = (e) => {
+        e.preventDefault();
+        const updatedToDo = [...todoList, {id: todoList.length+1, name: username, task: task, completed: false}];
+        setToDoList(updatedToDo);
         
-        </div>
-    );
-}
+    }
 
+    const toggleTaskCompletion = (id) => {
+        setToDoList(
+            todoList.filter((task) => task.id !== id)
+            );
+    }
 
-export function TaskDisplay() {
-    
+    const [filteredTasks, setFilteredTasks] = useState('');
+
+    const filteredToDo = todoList.filter((task) => {
+        return task.task.toLowerCase().includes(filteredTasks.toLowerCase());
+    })
+
+    const TaskDisplay = () => {
+        return(
+            <div id="newTask">
+            {filteredToDo.map((user, index) => (
+                <div key={index}>
+                    <label>
+                        <input type="checkbox"
+                        class="checkbox" 
+                        checked={user.completed} 
+                        onChange={() => toggleTaskCompletion(user.id)} />
+                        <span><b>Task:</b> {user.task}</span>
+                        <p>Created By: {user.name}</p>
+                    </label>
+                </div>
+            ))}
+            </div>
+        );
+    }
+
     return(
         <div>
-        {todoList.map((user, index) => (
-            <div key={index}>
-            <p>Username: {user.name} Task: {user.task}</p>
-            </div>
-        ))}
+        <form id="container">
+            <label>Username: 
+                <input id="username" type="text" class="text" onChange={HandleUserName}></input>
+            </label>
+            <label>Task: 
+                <input id="title" type="text" class="text" onChange={HandleTask}></input>
+            </label>
+            <button className="add-btn" type="button" onClick={AddTasks}>Add</button>
+            <input id="filter" type="text" class="text" onChange={(e) =>
+                setFilteredTasks(e.target.value)}></input>
+        </form>
+        <TaskDisplay />
         </div>
     );
 }
