@@ -1,4 +1,8 @@
 import React from 'react';
+import Button from './Styled/Button';
+import Input from './Styled/Input';
+import Label from './Styled/ContainerLabel';
+import Container from './Styled/ContainerDiv';
 
 function TaskInputForm({setUsername, setTask, addTasks}) {
 
@@ -13,17 +17,17 @@ function TaskInputForm({setUsername, setTask, addTasks}) {
     
 
         return (
-            <div>
+            <Container>
                 <form id="container">
-                <label>Username: 
-                <input id="username" type="text" class="text" onChange={HandleUserName}></input>
-                </label>
-                <label>Task: 
-                <input id="title" type="text" class="text" onChange={HandleTask}></input>
-                <button className="add-btn" type="button" onClick={addTasks}>Add</button>
-                </label>
+                    <Label>Username: 
+                        <Input primary id="username" type="text" class="text" onChange={HandleUserName}></Input>
+                    </Label>
+                    <Label>Task: 
+                        <Input primary id="title" type="text" class="text" onChange={HandleTask}></Input>
+                        <Button primary className="add-btn" type="button" onClick={addTasks}>Add</Button>
+                    </Label>
                 </form>
-            </div>
+            </Container>
         )
 }
 export default TaskInputForm;

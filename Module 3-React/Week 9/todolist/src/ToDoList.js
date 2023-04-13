@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './ToDoList.css';
 import TaskInputForm from './TaskInputForm';
 import TaskFilter from './TaskFilter';
 import TaskList from './TaskList';
