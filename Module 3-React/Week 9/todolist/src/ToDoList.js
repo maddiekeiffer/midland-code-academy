@@ -7,6 +7,7 @@ export function ToDoTaskDisplay() {
   const [username, setUsername] = useState('');
   const [task, setTask] = useState('');
 
+
   const [todoList, setToDoList] = useState([
     { id: 1, name: 'mads', task: "Clean basement room", completed: true },
     { id: 2, name: 'mads', task: "Pack clothes, Minnie's essentials", completed: false },
@@ -23,8 +24,13 @@ export function ToDoTaskDisplay() {
     setToDoList(updatedToDo);
   };
 
-  const toggleTaskCompletion = (id) => {
-    setToDoList(todoList.filter((task) => task.id !== id));
+  const [isChecked, setIsChecked] = useState(false);
+
+  const toggleTaskCompletion = () => {
+    setIsChecked(!isChecked);
+
+    //Can use this code if want to remove task with checkbox:
+    //setToDoList(todoList.filter((task) => task.id !== id));
   };
 
   const [filteredTasks, setFilteredTasks] = useState('');
@@ -43,7 +49,7 @@ export function ToDoTaskDisplay() {
     <div>
       <TaskInputForm setUsername={setUsername} setTask={setTask} addTasks={AddTasks} />
       <TaskFilter setFilteredTasks={setFilteredTasks} />
-      <TaskList filteredToDo={filteredToDo} toggleTaskCompletion={toggleTaskCompletion} deleteTasks={DeleteTasks} />
+      <TaskList filteredToDo={filteredToDo}  toggleTaskCompletion={toggleTaskCompletion} deleteTasks={DeleteTasks} />
     </div>
   );
 }

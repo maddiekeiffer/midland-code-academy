@@ -3,15 +3,15 @@ import Container from './Styled/ContainerDiv';
 import Button from './Styled/Button';
 import P from './Styled/P';
 
-export default function TaskItem({user, toggleTaskCompletion, deleteTasks}) {
+export default function TaskItem({user, isChecked, toggleTaskCompletion, deleteTasks}) {
 
     return(
         <Container>
             <label>
                 <input type="checkbox"
                 className="checkbox" 
-                checked={user.completed} 
-                onChange={() => toggleTaskCompletion(user.id)} />
+                checked={isChecked} 
+                onChange={toggleTaskCompletion} />
                 <span>
                     <b>Task:</b> {user.task}
                 </span>
