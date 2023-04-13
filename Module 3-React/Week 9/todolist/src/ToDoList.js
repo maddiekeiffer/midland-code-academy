@@ -8,9 +8,10 @@ export function ToDoTaskDisplay() {
   const [task, setTask] = useState('');
 
   const [todoList, setToDoList] = useState([
-    { id: 1, name: 'mads', task: 'clean', completed: false },
-    { id: 2, name: 'mads', task: 'cry', completed: false },
-    { id: 3, name: 'mads', task: 'repeat', completed: false },
+    { id: 1, name: 'mads', task: "Clean basement room", completed: true },
+    { id: 2, name: 'mads', task: "Pack clothes, Minnie's essentials", completed: false },
+    { id: 3, name: 'mads', task: "Drive to Breeze's in Bellevue", completed: false },
+    { id: 4, name: 'mads', task: "Pick up new clothes from Samantha's house", completed: false },
   ]);
 
   const AddTasks = (e) => {
