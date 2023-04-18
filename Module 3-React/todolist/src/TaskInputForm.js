@@ -3,6 +3,7 @@ import Button from './Styled/Button';
 import Input from './Styled/Input';
 import Label from './Styled/ContainerLabel';
 import Container from './Styled/ContainerDiv';
+import Form from './Styled/Form';
 
 function TaskInputForm({setUsername, setTask, addTasks}) {
 
@@ -18,15 +19,15 @@ function TaskInputForm({setUsername, setTask, addTasks}) {
 
         return (
             <Container>
-                <form id="container">
+                <Form>
                     <Label>Username: 
-                        <Input primary id="username" type="text" class="text" onChange={HandleUserName}></Input>
+                        <Input primary id="username" type="text" onChange={HandleUserName}></Input>
                     </Label>
                     <Label>Task: 
-                        <Input primary id="title" type="text" class="text" onChange={HandleTask}></Input>
+                        <Input primary id="title" type="text" onChange={HandleTask}></Input>
                         <Button primary className="add-btn" type="button" onClick={addTasks}>Add</Button>
                     </Label>
-                </form>
+                </Form>
             </Container>
         )
 }

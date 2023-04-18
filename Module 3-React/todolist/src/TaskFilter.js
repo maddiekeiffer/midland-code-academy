@@ -7,7 +7,7 @@ export default function TaskFilter({setFilteredTasks}) {
     return(
         <Container>
             <Label>Filter: 
-            <Input id="filter" type="text" class="text" onChange={(e) => setFilteredTasks(e.target.value)}></Input>
+            <Input id="filter" type="text" onChange={(e) => setFilteredTasks(e.target.value)}></Input>
             </Label>
         </Container>
     );
