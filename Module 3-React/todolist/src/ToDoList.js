@@ -1,13 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import TaskInputForm from './TaskInputForm';
 import TaskFilter from './TaskFilter';
 import TaskList from './TaskList';
 import Container from './Styled/ContainerDiv';
 import H5 from './Styled/H5';
+import UserTaskContext from './Context/UserTaskContext';
 
 export function ToDoTaskDisplay() {
-  const [username, setUsername] = useState('');
-  const [task, setTask] = useState('');
+  // const [username, setUsername] = useState('');
+  // const [task, setTask] = useState('');
+
+  const usernameRef = useRef('');
+  const taskRef = useRef('');
+
+  const [userTask, setUserTask] = useState({
+    username: '',
+    task: '',
+  })
 
 
   const [todoList, setToDoList] = useState([
@@ -21,7 +30,7 @@ export function ToDoTaskDisplay() {
 
   const AddTasks = (e) => {
     e.preventDefault();
-    const newTask = { id: todoList.length + 1, name: username, task: task, completed: false };
+    const newTask = { id: todoList.length + 1, name: usernameRef.current, task: taskRef.current, completed: false };
     const updatedToDo = [
       ...todoList,
       newTask,
@@ -56,16 +65,30 @@ export function ToDoTaskDisplay() {
     setToDoList(newList);
     }
 
-  const [userCharCount, setUserCharCount] = useState(0);
-  const [taskCharCount, setTaskCharCount] = useState(0);
+  // const [userCharCount, setUserCharCount] = useState(0);
+  // const [taskCharCount, setTaskCharCount] = useState(0);
 
-  useEffect(() => {
-    setTaskCharCount(task.length);
-  }, [task]);
+  const userCharCountRef = useRef(0);
+  const taskCharCountRef = useRef(0);
 
-  useEffect(() => {
-    setUserCharCount(username.length);
-  }, [username]);
+  const UpdateUserCharCount = () => { 
+    userCharCountRef.current = usernameRef.current.length;
+    const counterDisplay = document.getElementById("user-count");
+    counterDisplay.textContent = `User Character Count: ${userCharCountRef.current}`;
+  }
+  const UpdateTaskCharCount = () => {
+    taskCharCountRef.current = taskRef.current.length;
+    const counterDisplay = document.getElementById("task-count");
+    counterDisplay.textContent = `Task Character Count: ${taskCharCountRef.current}`;
+  }
+
+  // useEffect(() => {
+  //   setTaskCharCount(task.length);
+  // }, [task]);
+
+  // useEffect(() => {
+  //   setUserCharCount(username.length);
+  // }, [username]);
   
   const [timer, setTimer] = useState(0);
 
@@ -83,18 +106,20 @@ export function ToDoTaskDisplay() {
 
 
   return (
+    <UserTaskContext.Provider value={{ userTask, setUserTask }}>
     <Container>
       <H5>Timer: {timer} seconds</H5>
-      <H5>User Character Count: {userCharCount}</H5>
-      <H5>Task Character Count: {taskCharCount}</H5>
+      <H5 id="user-count"></H5>
+      <H5 id="task-count"></H5>
     {recentTask && (
       <div>
         <H5>Most Recently Added Task: {recentTask}</H5>
       </div>
     )}
-      <TaskInputForm setUsername={setUsername} setTask={setTask} addTasks={AddTasks} />
+    <TaskInputForm usernameRef={usernameRef} taskRef={taskRef} updateUserCharCount={UpdateUserCharCount} updateTaskCharCount={UpdateTaskCharCount} addTasks={AddTasks} />
       <TaskFilter setFilteredTasks={setFilteredTasks} />
       <TaskList filteredToDo={filteredToDo}  toggleTaskCompletion={toggleTaskCompletion} deleteTasks={DeleteTasks} />
     </Container>
+    </UserTaskContext.Provider>
   );
 }

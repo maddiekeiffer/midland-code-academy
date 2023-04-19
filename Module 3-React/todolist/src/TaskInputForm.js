@@ -5,15 +5,19 @@ import Label from './Styled/ContainerLabel';
 import Container from './Styled/ContainerDiv';
 import Form from './Styled/Form';
 
-function TaskInputForm({setUsername, setTask, addTasks}) {
+function TaskInputForm({usernameRef, taskRef, updateUserCharCount, updateTaskCharCount, addTasks}) {
 
     const HandleUserName = (e) => {
         e.preventDefault();
-        setUsername(e.target.value);
+        //setUsername(e.target.value);
+        usernameRef.current = e.target.value;
+        updateUserCharCount();
         }
     const HandleTask = (e) => {
         e.preventDefault();
-        setTask(e.target.value);
+        //setTask(e.target.value);
+        taskRef.current = e.target.value;
+        updateTaskCharCount();
         }
     
 
