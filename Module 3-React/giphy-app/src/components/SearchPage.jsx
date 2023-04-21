@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 
 
 function SearchPage() {
+    
     const [search, setSearch] = useState('');
     const [limit, setLimit] = useState('');
     const [offset, setOffset] = useState('');
