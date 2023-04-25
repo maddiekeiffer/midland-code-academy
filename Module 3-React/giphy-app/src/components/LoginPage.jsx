@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../context/UserContext';
+import Button from '../styled/elements/Button';
 
 function LoginPage() {
-    const [username, setUsername] = useState();
-    const [password, setPassword] = useState();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
 
-    const { setUser } = useUserContext;
+    const { setUser } = useUserContext();
 
     const handleLogin = (e) => {
         e.preventDefault();
@@ -17,11 +18,11 @@ function LoginPage() {
     <div>
         <form>
             <label>Username: 
-                <input type="text" onChange={(e) => {setUsername(e.target.value)}}></input>
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}></input>
             </label>
             <label>Passcode:
-                <input type="password" onChange={(e) => {setPassword(e.target.value)}}></input>
-                <button type="submit" onClick={handleLogin}>Submit</button>
+                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                <Button type="submit" onClick={handleLogin}>Submit</Button>
             </label>
         </form>
     </div>
