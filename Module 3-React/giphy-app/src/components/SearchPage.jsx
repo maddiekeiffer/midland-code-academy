@@ -3,6 +3,8 @@ import Button from '../styled/elements/Button';
 import getGifs from '../functions/getGifs';
 import { useQuery } from 'react-query';
 import { useSearchContext } from '../context/SearchContext';
+import { useFavoritesContext } from '../context/FavoritesContext';
+import  GifDisplay  from '../components/GifDisplay';
 
 
 function SearchPage() {
@@ -10,59 +12,32 @@ function SearchPage() {
     const [url, setUrl] = useState(null);
     
     const [search, setSearch] = useState('');
-    const [limit, setLimit] = useState('');
     const [offset, setOffset] = useState('');
     const [rating, setRating] = useState('g');
     const [lang, setLang] = useState('en');
 
+    const { favorites, addFavorite, removeFavorite } = useFavoritesContext();
+
     const BuildURL = () => {
         let base = `&q=${search}&rating=${rating}&lang=${lang}`;
-
-        if(limit !== "") {
-            base = base + `&limit=${limit}`;
-        } else if(offset !== "") {
+        if(offset !== "") {
             base = base + `&offset=${offset}`;
-        } else if(offset !== "" && limit !== "") {
-            base = base + `&limit=${limit}&offset=${offset}`;
         }
         return base;
     }
 
-const { searchResults, setSearchResults }= useSearchContext();
+    const { searchResults, setSearchResults }= useSearchContext();
 
     const { isLoading, error, isSuccess} = useQuery(['getGifs', url], () => getGifs(url), {
         enabled: !!url,
         onSuccess: (data) => setSearchResults(data),
     })
 
-    if(isLoading) { 
-        return "Loading. . ."
-    }
-    if(error) {
-        return "An error has occured: " + error.message;
-    }
-    if(isSuccess) {
-        return console.log(searchResults);
-    }
-
-    // useEffect(() => {
-    //     const fetchGifs = async () =>  {
-    //       if (url) {
-    //         const gifs = await getGifs(url);
-    //         console.log(gifs);
-    //       }
-    //     }
-    //     fetchGifs();
-    //   }, [url]);
-
   return (
     <div>
+        <h2>Search for gifs:</h2>
         <label>Search:
             <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}></input>
-        </label>
-        <label>Limit search:
-            <input type="text" value={limit} 
-            onChange={(e) => setLimit(e.target.value)}></input>
         </label>
         <label>Offset:
         <input type="text" value={offset} 
@@ -84,6 +59,20 @@ const { searchResults, setSearchResults }= useSearchContext();
             </select>
         </label>
         <Button type="submit" onClick={() => setUrl(BuildURL())}>Search</Button>
+        {isLoading && <p>Loading. . .</p>}
+        {error && <p>An error has occured: {error.message} </p>}
+        {isSuccess && 
+            searchResults.map((val) => (
+            <GifDisplay
+                key={val.gif_id}
+                title={val.title}
+                gif_id={val.gif_id}
+                url={val.url}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+            />
+            ))
+        }
     </div>
   );
 }
