@@ -13,19 +13,21 @@ export const useSearchContext = () => {
 }
 
 export const SearchProvider = (props) => {
-    const [search, dispatch] = useReducer(searchReducer, INITIAL_SEARCH_STATE);
+    const [searchResults, dispatch] = useReducer(searchReducer, INITIAL_SEARCH_STATE);
 
-    const setSearch = useCallback(
-        (search) => dispatch({ type: SET_SEARCH, payload: search }),
+    const setSearchResults = useCallback(
+        (searchResults) => {
+          dispatch({ type: SET_SEARCH, payload: searchResults });
+        },
         [dispatch]
-    );
+      );
 
     const clearSearch = useCallback(() => {
         dispatch({ type: CLEAR_SEARCH })
     }, [dispatch]);
 
     return(
-        <SearchContext.Provider value={{ search, setSearch, clearSearch }}>
+        <SearchContext.Provider value={{ searchResults, setSearchResults, clearSearch }}>
             {props.children}
         </SearchContext.Provider>
     )

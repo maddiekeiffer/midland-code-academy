@@ -1,6 +1,8 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState } from 'react';
 import Button from '../styled/elements/Button';
 import getGifs from '../functions/getGifs';
+import { useQuery } from 'react-query';
+import { useSearchContext } from '../context/SearchContext';
 
 
 function SearchPage() {
@@ -26,15 +28,32 @@ function SearchPage() {
         return base;
     }
 
-    useEffect(() => {
-        const fetchGifs = async () =>  {
-          if (url) {
-            const gifs = await getGifs(url);
-            console.log(gifs);
-          }
-        }
-        fetchGifs();
-      }, [url]);
+const { searchResults, setSearchResults }= useSearchContext();
+
+    const { isLoading, error, isSuccess} = useQuery(['getGifs', url], () => getGifs(url), {
+        enabled: !!url,
+        onSuccess: (data) => setSearchResults(data),
+    })
+
+    if(isLoading) { 
+        return "Loading. . ."
+    }
+    if(error) {
+        return "An error has occured: " + error.message;
+    }
+    if(isSuccess) {
+        return console.log(searchResults);
+    }
+
+    // useEffect(() => {
+    //     const fetchGifs = async () =>  {
+    //       if (url) {
+    //         const gifs = await getGifs(url);
+    //         console.log(gifs);
+    //       }
+    //     }
+    //     fetchGifs();
+    //   }, [url]);
 
   return (
     <div>

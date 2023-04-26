@@ -21,11 +21,12 @@ export const FavoritesProvider = (props) => {
         [dispatch]
     );
 
-    const removeFavorite = useCallback(() => {
+    const removeFavorite = useCallback(
         (gif_id) => {
-            dispatch({ type: REMOVE_FAVORITE, payload: gif_id });
-        }, [dispatch]
-    });
+          dispatch({ type: REMOVE_FAVORITE, payload: gif_id });
+        },
+        [dispatch]
+      );
 
     const clearFavorites = useCallback(() => {
         dispatch({ type: CLEAR_FAVORITES })
