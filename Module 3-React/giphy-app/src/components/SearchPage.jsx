@@ -2,7 +2,6 @@ import { React, useState } from 'react';
 import Button from '../styled/elements/Button';
 import getGifs from '../functions/getGifs';
 import { useQuery } from 'react-query';
-//import { useSearchContext } from '../context/SearchContext';
 import { useFavoritesContext } from '../context/FavoritesContext';
 import  GifDisplay  from '../components/GifDisplay';
 
@@ -12,7 +11,6 @@ function SearchPage() {
     const [url, setUrl] = useState(null);
     
     const [search, setSearch] = useState('');
-    const [offset, setOffset] = useState('');
     const [rating, setRating] = useState('g');
     const [lang, setLang] = useState('en');
 
@@ -20,9 +18,6 @@ function SearchPage() {
 
     const BuildURL = () => {
         let base = `&q=${search}&rating=${rating}&lang=${lang}`;
-        if(offset !== "") {
-            base = base + `&offset=${offset}`;
-        }
         return base;
     }
 
@@ -43,10 +38,6 @@ function SearchPage() {
         <h2>Search for gifs:</h2>
         <label>Search:
             <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}></input>
-        </label>
-        <label>Offset:
-        <input type="text" value={offset} 
-            onChange={(e) => setOffset(e.target.value)}></input>
         </label>
         <label htmlFor="rating">Rating:
             <select name="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
