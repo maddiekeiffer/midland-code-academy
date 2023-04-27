@@ -2,7 +2,7 @@ import { React, useState } from 'react';
 import Button from '../styled/elements/Button';
 import getGifs from '../functions/getGifs';
 import { useQuery } from 'react-query';
-import { useSearchContext } from '../context/SearchContext';
+//import { useSearchContext } from '../context/SearchContext';
 import { useFavoritesContext } from '../context/FavoritesContext';
 import  GifDisplay  from '../components/GifDisplay';
 
@@ -26,12 +26,17 @@ function SearchPage() {
         return base;
     }
 
-    const { searchResults, setSearchResults }= useSearchContext();
 
-    const { isLoading, error, isSuccess} = useQuery(['getGifs', url], () => getGifs(url), {
-        enabled: !!url,
-        onSuccess: (data) => setSearchResults(data),
-    })
+    const { isLoading, error, isSuccess, data: searchResults } = useQuery(
+        ["getGifs", url],
+        () => getGifs(url),
+        {
+          enabled: !!url,
+          onSuccess: (data) => {
+            console.log("Received data:", data);
+          },
+        }
+      );
 
   return (
     <div>
@@ -61,18 +66,20 @@ function SearchPage() {
         <Button type="submit" onClick={() => setUrl(BuildURL())}>Search</Button>
         {isLoading && <p>Loading. . .</p>}
         {error && <p>An error has occured: {error.message} </p>}
-        {isSuccess && 
+        {isSuccess && (
             searchResults.map((val) => (
-            <GifDisplay
-                key={val.gif_id}
-                title={val.title}
-                gif_id={val.gif_id}
-                url={val.url}
-                addFavorite={addFavorite}
-                removeFavorite={removeFavorite}
-            />
+                <GifDisplay
+                    key={val.gif_id}
+                    {...val}
+                    addFavorite={() => addFavorite({gif_id: val.gif_id, url: val.url, title: val.title})}
+                    removeFavorite={removeFavorite}
+                    isFavorite={favorites.some((fav) => fav.gif_id === val.gif_id)}
+                />
             ))
-        }
+        )}
+
+
+
     </div>
   );
 }

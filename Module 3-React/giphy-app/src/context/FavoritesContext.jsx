@@ -1,40 +1,52 @@
-import React, { createContext, useCallback, useContext, useReducer } from 'react';
-import {
+import React, {
+    useReducer,
+    useContext,
+    createContext,
+    useCallback,
+  } from "react";
+  import {
     ADD_FAVORITE,
-    REMOVE_FAVORITE,
     CLEAR_FAVORITES,
+    favoritesReducer,
     INITIAL_FAVORITE_STATE,
-    favoritesReducer
-} from '../reducers/favoritesReducer';
-
-const FavoritesContext = createContext(null);
-
-export const useFavoritesContext = () => {
+    REMOVE_FAVORITE,
+  } from "../reducers/favoritesReducer";
+  
+  const FavoritesContext = createContext(null);
+  
+  export const useFavoritesContext = () => {
     return useContext(FavoritesContext);
-}
-
-export const FavoritesProvider = (props) => {
-    const [favorite, dispatch] = useReducer(favoritesReducer, INITIAL_FAVORITE_STATE);
-
-    const addFavorite = useCallback(
-        (fav) => dispatch({ type: ADD_FAVORITE, payload: fav }),
-        [dispatch]
+  }
+  
+  export function FavoritesProvider(props) {
+    const [favorites, dispatch] = useReducer(
+      favoritesReducer,
+      INITIAL_FAVORITE_STATE
     );
-
+  
+    const addFavorite = useCallback(
+      (gif) => {
+        dispatch({ type: ADD_FAVORITE, payload: gif });
+      },
+      [dispatch]
+    );
+  
     const removeFavorite = useCallback(
-        (gif_id) => {
-          dispatch({ type: REMOVE_FAVORITE, payload: gif_id });
-        },
-        [dispatch]
-      );
-
+      (gif_id) => {
+        dispatch({ type: REMOVE_FAVORITE, payload: gif_id });
+      },
+      [dispatch]
+    );
+  
     const clearFavorites = useCallback(() => {
-        dispatch({ type: CLEAR_FAVORITES })
+      dispatch({ type: CLEAR_FAVORITES });
     }, [dispatch]);
-
-    return(
-        <FavoritesContext.Provider value={{ favorite, addFavorite, removeFavorite, clearFavorites }}>
-            {props.children}
-        </FavoritesContext.Provider>
-    )
-}
+  
+    return (
+      <FavoritesContext.Provider
+        value={{ favorites, addFavorite, removeFavorite, clearFavorites }}
+      >
+        {props.children}
+      </FavoritesContext.Provider>
+    );
+  }
