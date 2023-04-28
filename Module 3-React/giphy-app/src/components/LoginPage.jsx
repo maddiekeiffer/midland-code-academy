@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useUserContext } from '../context/UserContext';
 import Button from '../styled/elements/Button';
+import Input from '../styled/elements/Input';
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -18,10 +19,10 @@ function LoginPage() {
     <div>
         <form>
             <label>Username: 
-                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)}></input>
+                <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)}></Input>
             </label>
             <label>Passcode:
-                <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></input>
+                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
                 <Button type="submit" onClick={handleLogin}>Submit</Button>
             </label>
         </form>

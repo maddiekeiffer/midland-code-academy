@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { UL } from '../styled/elements/UL';
 
 function Menu() {
+
   return (
     <nav>
-        <ul>
+        <UL>
             <li>
                 <Link to='/login'>Login</Link>
             </li>
@@ -14,7 +16,7 @@ function Menu() {
             <li>
                 <Link to='/search'>Search</Link>
             </li>
-        </ul>   
+        </UL>   
     </nav>
   )
 };

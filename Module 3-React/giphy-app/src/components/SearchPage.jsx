@@ -1,5 +1,7 @@
 import { React, useState } from 'react';
 import Button from '../styled/elements/Button';
+import Input from '../styled/elements/Input';
+import { Select, Option} from '../styled/elements/Select';
 import getGifs from '../functions/getGifs';
 import { useQuery } from 'react-query';
 import { useFavoritesContext } from '../context/FavoritesContext';
@@ -37,22 +39,22 @@ function SearchPage() {
     <div>
         <h2>Search for gifs:</h2>
         <label>Search:
-            <input type="text" value={search} onChange={(e) => setSearch(e.target.value)}></input>
+            <Input type="text" value={search} onChange={(e) => setSearch(e.target.value)}></Input>
         </label>
         <label htmlFor="rating">Rating:
-            <select name="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
-                <option value="g">G</option>
-                <option value="pg">PG</option>
-                <option value="pg-13">PG-13</option>
-                <option value="r">R</option>
-            </select>
+            <Select name="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
+                <Option value="g">G</Option>
+                <Option value="pg">PG</Option>
+                <Option value="pg-13">PG-13</Option>
+                <Option value="r">R</Option>
+            </Select>
         </label>
         <label htmlFor="lang">Lang:
-            <select name="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
-                <option value="en">English</option>
-                <option value="es">Espa&ntilde;ol</option>
-                <option value="fr">French</option>
-            </select>
+            <Select name="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
+                <Option value="en">English</Option>
+                <Option value="es">Espa&ntilde;ol</Option>
+                <Option value="fr">French</Option>
+            </Select>
         </label>
         <Button type="submit" onClick={() => setUrl(BuildURL())}>Search</Button>
         {isLoading && <p>Loading. . .</p>}

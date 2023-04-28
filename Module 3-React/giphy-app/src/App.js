@@ -5,6 +5,7 @@ import { LoginPageWithAuth, SearchPageWithAuth, FavoritesPageWithAuth } from './
 
 
 function App() {
+  
   return (
     <Router>
       <Menu />
