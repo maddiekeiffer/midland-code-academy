@@ -12,7 +12,7 @@ export const useUserContext = () => {
     return useContext(UserContext);
 }
 
-export const UserProvider = (props) => {
+export function UserProvider(props) {
     const [user, dispatch] = useReducer(userReducer, INITIAL_USER_STATE);
 
     const setUser = useCallback(
