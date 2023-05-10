@@ -19,11 +19,11 @@ function LoginPage() {
     <div>
         <form>
             <label>Username: 
-                <Input type="text" value={username} onChange={(e) => setUsername(e.target.value)}></Input>
+                <Input data-testid="username" type="text" value={username} onChange={(e) => setUsername(e.target.value)}></Input>
             </label>
             <label>Passcode:
-                <Input type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
-                <Button type="submit" onClick={handleLogin}>Submit</Button>
+                <Input data-testid="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
+                <Button data-testid="login" type="submit" disabled={username.length < 3 || password.length < 3} onClick={handleLogin}>Submit</Button>
             </label>
         </form>
     </div>
