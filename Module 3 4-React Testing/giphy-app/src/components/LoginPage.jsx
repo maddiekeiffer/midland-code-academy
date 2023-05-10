@@ -23,7 +23,7 @@ function LoginPage() {
             </label>
             <label>Passcode:
                 <Input data-testid="password" type="password" value={password} onChange={(e) => setPassword(e.target.value)}></Input>
-                <Button data-testid="login" type="submit" disabled={username.length < 3 || password.length < 3} onClick={handleLogin}>Submit</Button>
+                <Button data-testid="login" type="submit" disabled={username.length < 4 || password.length < 4} onClick={handleLogin}>Submit</Button>
             </label>
         </form>
     </div>
