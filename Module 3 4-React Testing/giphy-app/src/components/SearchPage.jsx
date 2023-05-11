@@ -39,10 +39,10 @@ function SearchPage() {
     <div>
         <h2>Search for gifs:</h2>
         <label>Search:
-            <Input type="text" value={search} onChange={(e) => setSearch(e.target.value)}></Input>
+            <Input type="text" data-testid="search-text" value={search} onChange={(e) => setSearch(e.target.value)}></Input>
         </label>
         <label htmlFor="rating">Rating:
-            <Select name="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
+            <Select name="rating" data-testid="rating" value={rating} onChange={(e) => setRating(e.target.value)}>
                 <Option value="g">G</Option>
                 <Option value="pg">PG</Option>
                 <Option value="pg-13">PG-13</Option>
@@ -50,13 +50,13 @@ function SearchPage() {
             </Select>
         </label>
         <label htmlFor="lang">Lang:
-            <Select name="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
+            <Select name="lang" data-testid="lang" value={lang} onChange={(e) => setLang(e.target.value)}>
                 <Option value="en">English</Option>
                 <Option value="es">Espa&ntilde;ol</Option>
                 <Option value="fr">French</Option>
             </Select>
         </label>
-        <Button type="submit" onClick={() => setUrl(BuildURL())}>Search</Button>
+        <Button type="submit" data-testid="search-button" onClick={() => setUrl(BuildURL())}>Search</Button>
         {isLoading && <p>Loading. . .</p>}
         {error && <p>An error has occured: {error.message} </p>}
         {isSuccess && (
