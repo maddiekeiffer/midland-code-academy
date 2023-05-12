@@ -14,7 +14,8 @@ function Menu() {
     <nav>
         <UL>
             <li>
-            <Link to="/login" onClick={() => {
+            <Link to="/login" data-testid="login"
+            onClick={() => {
             clearUser();
             clearFavorites();
             clearSearchResults();
