@@ -2,7 +2,10 @@ const express = require('express');
 const app = express();
 const port = 5000;
 
-const posts = require('./posts')
+const posts = require('./posts');
+const loggerMiddleware = require('./loggerMiddleware');
+
+app.use(loggerMiddleware);
 
 app.get('/', (req, res) => {
     res.send('Hello World');
@@ -27,3 +30,30 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on ${port}`);
 });
+
+const mysql = require('mysql');
+
+const connection = mysql.createConnection({
+    host: '127.0.0.1',
+    user: 'root',
+    password: 'root',
+    database: 'practice_database'
+});
+
+connection.connect((err) => {
+    if(err) {
+        console.log('error: ' + err.stack);
+        return;
+    }
+    console.log('connected as: ' + connection.threadId);
+});
+
+connection.query('SELECT * FROM users', 
+    function(err, results, fields) {
+        if (err) throw err;
+        console.log(results);
+        console.log(fields);
+    }
+);
+
+connection.end();
