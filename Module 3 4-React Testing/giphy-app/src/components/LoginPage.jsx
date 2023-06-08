@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useUserContext } from '../context/UserContext';
 import Button from '../styled/elements/Button';
 import Input from '../styled/elements/Input';
-const bcrypt = require("bcryptjs");
+import axios from 'axios';
+
 
 function LoginPage() {
     const [username, setUsername] = useState('');
@@ -10,15 +11,24 @@ function LoginPage() {
 
     const { setUser } = useUserContext();
 
-    const saltRounds = 10;
-    let hash;
-
-    const handleLogin = (e) => {
+    const handleLogin = async (e) => {
         e.preventDefault();
-        setUser({username});
-        console.log('user: ', username);
-        hash = bcrypt.hashSync(password, saltRounds);
-        console.log(hash);
+
+        try {
+            const response = await axios.post('http://localhost:3006/login', {
+                username: username,
+                password: password
+            });
+            if(response.status === 200) {
+                setUser({username});
+                console.log('user: ', username);        
+            } else {
+                console.error('Error logging in');
+            }
+        }
+        catch (err) {
+            console.error(err);
+        }
     }
 
   return (
