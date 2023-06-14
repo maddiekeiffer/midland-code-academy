@@ -6,12 +6,15 @@ import { useFavoritesContext } from '../context/FavoritesContext';
 import { useSearchContext } from '../context/SearchContext';
 
 function Menu() {
-    const { clearUser } = useUserContext();
+    const { user, clearUser } = useUserContext();
     const { clearFavorites } = useFavoritesContext();
     const { clearSearchResults } = useSearchContext();
 
   return (
     <nav>
+    {!user && (
+        <Link to="/login">Login</Link> )}
+    {user && (
         <UL>
             <li>
             <Link to="/login" data-testid="login"
@@ -28,7 +31,8 @@ function Menu() {
             <li>
                 <Link to='/search'>Search</Link>
             </li>
-        </UL>   
+        </UL>
+        )}   
     </nav>
   )
 };
