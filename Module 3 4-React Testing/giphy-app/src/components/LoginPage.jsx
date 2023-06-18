@@ -17,12 +17,7 @@ const LoginPage = () => {
     e.preventDefault();
     console.log(e.target.value)
 
-    reqURL = 'http://localhost:3006/auth/' + e.target.value;
-    // This is because in our index.js we did app.use('/auth', authRoutes)
-    // so the url for login/register is actually this:
-    // http://localhost:3006/auth/login and http://localhost:3006/auth/register
-    // we have to use auth/login or auth/register 
-    // because we split up the files in the auth folder
+    reqURL = 'http://localhost:3006/' + e.target.value;
 
       try {
         const response = await axios.post(reqURL, {
