@@ -9,6 +9,17 @@ const mysql = require('mysql');
 const bcrypt = require('bcryptjs');
 const saltRounds = 10;
 
+const passport = require('passport');
+const LocalStragety = require('passport-local').Strategy;
+const session = require('express-session');
+//secret is the secret key to sign teh session cookie,
+//resave saves the session to the store even if the session wasn't modified, 
+//saveUnitialized saves it 
+app.use(session({ secret: 'secret', resave: false, saveUninitialized: true }));
+app.use(passport.initialize());
+app.use(passport.session());
+
+
 app.use(cors());
 app.use(express.json());
 
@@ -22,6 +33,40 @@ const connection = mysql.createConnection({
 connection.connect((err) => {
     if (err) throw err;
     console.log('Connected to the database');
+});
+
+passport.use(
+    new LocalStragety(function (username, password, done) {
+        connection.query(
+            "SELECT * FROM users WHERE username = ?",
+            [username],
+            function(err, user) {
+                if(err) {
+                    return done(err);
+                }
+                if(!user[0]) {
+                    return done(null, false, {message: "Incorrect username"});
+                }
+                if(!bcrypt.compareSync(password, user[0].password)) {
+                    return done(null, false, {message: "Incorrect password"});
+                }
+                return done(null, user[0]);
+            }
+        )
+    })
+)
+
+passport.serializeUser(function(user, done) {
+    done(null, user.id);
+});
+
+passport.deserializeUser(function(id, done) {
+    connection.query(
+        "SELECT * FROM users WHERE id = ?", 
+        [id], 
+        function(err, user) {
+            done(err, user[0]);
+        });
 });
 
 // We could combine register and login within a single endpoint,
@@ -56,15 +101,25 @@ app.post('/register', (req, res) => {
                 res.status(500).send({ error: error });
                 return;
             }
+            
             console.log(id, username, password);
             res.status(200).send({ success: 'User registered'});
         });
     });
 });
 
+app.post('/login', passport.authenticate('local'), (req, res) => {
+    res.status(200).send({ success: "User logged in" });
+});
+
+app.listen(port, () => {
+    console.log("App listening at: " + port);
+});
+
+//ORIGINAL CODE FOR LOGIN WITHOUT PASSPORT: 
+/* 
 app.post('/login', (req, res) => {
     const { username, password } = req.body;
-
     // Check if the user already exists
     connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results) => {
         if (error) {
@@ -73,24 +128,13 @@ app.post('/login', (req, res) => {
             res.status(500).send({ error: error });
             return;
         }
-
         if (results.length === 0) {
             // If the results' length is 0, that means the username doesn't exist
             res.status(400).send({ error: 'No user with this username exists' });
             return;
         }
-        
         const hashedPassword = results[0].password;  // Get hashed password stored in the database
         const match = bcrypt.compareSync(password, hashedPassword);  // Compare hashed password with the plain text password
-
-        // The compareSync function hashes the plaintext password
-        // with the same salt that was used when the original password was hashed 
-        // (the salt is encoded within the hashed password).
-
-        // You don't need to hash the plaintext password before giving it to bcrypt
-        // since it does it internally anyway.
-        // It then compares to two to see if they're the same.
-        
         if (match) {
             // Passwords match
             res.status(200).send({ success: 'User logged in'});
@@ -102,7 +146,4 @@ app.post('/login', (req, res) => {
         }
     });
 });
-
-app.listen(port, () => {
-    console.log("App listening at: " + port);
-});
+*/
