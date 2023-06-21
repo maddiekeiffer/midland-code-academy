@@ -74,36 +74,42 @@ passport.deserializeUser(function(id, done) {
 // register/login are separate actions with different security implications.
 
 app.post('/register', (req, res) => {
-    const username = req.body.username;
-    const password = bcrypt.hashSync(req.body.password, saltRounds);
     // Generates a random 36 string id
     const id = uuidv4();
+    let userData = { id: id, username: req.body.username };
 
     // Check if the user already exists
-    connection.query('SELECT * FROM users WHERE username = ?', [username], (error, results) => {
+    connection.query('SELECT * FROM users WHERE username = ?', [userData.username], (error, results) => {
         if (error) {
             res.status(500).send({ error: error });
             return;
         }
 
         if (results.length > 0) {
-            // The user already exists
-            res.status(400).send({ error: 'Username is already taken' });
+            if(req.body.type === 'google'){
+                res.status(200).send({ success: 'User already registered' });
+            } else {
+                res.status(400).send({ error: 'Username is already taken' });
+            }
             return;
         }
 
+        if (req.body.password) {
+            userData.password = bcrypt.hashSync(req.body.password, saltRounds);
+        }
+
         // If no user was found, we can create a new user
-        connection.query('INSERT INTO users SET ?', {id: id, username: username, password: password},
+        connection.query('INSERT INTO users SET ?', userData,
         (error, results, fields) => {
             if (error) {
-                console.log(id, username, password);
+                console.log(userData);
                 console.log(error);
                 res.status(500).send({ error: error });
                 return;
             }
-            
-            console.log(id, username, password);
-            res.status(200).send({ success: 'User registered'});
+
+            console.log(userData);
+            res.status(200).send({ success: 'User registered' });
         });
     });
 });
@@ -111,6 +117,22 @@ app.post('/register', (req, res) => {
 app.post('/login', passport.authenticate('local'), (req, res) => {
     res.status(200).send({ success: "User logged in" });
 });
+
+// app.post('/favorites', (req, res) => {
+//     const { gif_id, url, title } = req.body;
+//     const user_id = req.user_id;
+//     connection.query(
+//         'INSERT INTO favorites SET ? SELECT favorites.user_id FROM favorites JOIN users ON favorites.user_id = users.id',
+//         { favorite_id: uuidv4(), user_id: user_id, gif_id: gif_id },
+//         (error, results, fields) => {
+//             if (error) {
+//                 res.status(500).send({ error: error });
+//                 return;
+//             }
+//             res.status(200).send({ success: "Favorite added "});
+//         }
+//     )
+// });
 
 app.listen(port, () => {
     console.log("App listening at: " + port);
