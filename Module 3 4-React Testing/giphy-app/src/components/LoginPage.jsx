@@ -7,25 +7,25 @@ import axios from 'axios';
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 // Import the functions you need from the SDKs you need
-// import { initializeApp } from "firebase/app";
-// import { getAnalytics } from "firebase/analytics";
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
 
 
 const LoginPage = () => {
 
-  // const firebaseConfig = {
-  //   apiKey: "AIzaSyApEDRt7OvoRgeK4uhVEKrdgVdTtuAQ5-o",
-  //   authDomain: "giphy-dd41e.firebaseapp.com",
-  //   projectId: "giphy-dd41e",
-  //   storageBucket: "giphy-dd41e.appspot.com",
-  //   messagingSenderId: "592264253757",
-  //   appId: "1:592264253757:web:a4daa310e43b88a2f7b554",
-  //   measurementId: "G-11WF0SQTW9"
-  // };
+  const firebaseConfig = {
+    apiKey: "AIzaSyApEDRt7OvoRgeK4uhVEKrdgVdTtuAQ5-o",
+    authDomain: "giphy-dd41e.firebaseapp.com",
+    projectId: "giphy-dd41e",
+    storageBucket: "giphy-dd41e.appspot.com",
+    messagingSenderId: "592264253757",
+    appId: "1:592264253757:web:a4daa310e43b88a2f7b554",
+    measurementId: "G-11WF0SQTW9"
+  };
   
   // Initialize Firebase
-  // const app = initializeApp(firebaseConfig);
-  // const analytics = getAnalytics(app);
+  const app = initializeApp(firebaseConfig);
+  const analytics = getAnalytics(app);
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
